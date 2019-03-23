@@ -6,7 +6,7 @@ module.exports = {
    * 基础路径
    * 参考：https://vuepress.vuejs.org/zh/guide/assets.html#%E5%9F%BA%E7%A1%80%E8%B7%AF%E5%BE%84
    */
-  base: '/vuejs-tutorial/',
+  base: '/',
   title: 'Vue.js 入门教程',
   description: '持续更新中...',
   // host: '0.0.0.0',

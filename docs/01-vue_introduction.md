@@ -61,19 +61,7 @@ Vue 是为了克服 HTML 在构建应用上的不足而设计的。Vue 有着诸
 
 ![components.png](./assets/components.png)
 
----
 
-## 对比传统 DOM 操作
-
-> 更少的代码实现更给力的功能。
-
-### 自增
-
-### 切换显示与隐藏
-
-### 列表渲染
-
----
 
 ## 相关链接
 
@@ -83,6 +71,8 @@ Vue 是为了克服 HTML 在构建应用上的不足而设计的。Vue 有着诸
 - [Vue 官方 API 参考文档](https://cn.vuejs.org/v2/api/)
 - [Vue 官方示例](https://cn.vuejs.org/v2/examples/)
 - [awesome-vue](https://github.com/vuejs/awesome-vue)
+- [我们为什么要用vue，他解决了什么问题，如何使用它？](https://blog.csdn.net/wxl1555/article/details/79964818 )
+- [VUE（现代框架） VS jquery（传统库）](https://zhuanlan.zhihu.com/p/20197803 )
 
 ---
 
