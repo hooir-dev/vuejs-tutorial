@@ -1,4 +1,4 @@
-# 第11章 综合案例
+# 第11章 电商管理项目
 
 ## 介绍
 
@@ -18,12 +18,6 @@
 - axios
 - 组件化 + 模块化
 
-### 案例演示
-
-### 案例收获
-
-- 掌握使用 Vue 全家桶开发一个中小型管理系统
-
 ## 零、准备
 
 ### 部署 API 接口服务
@@ -35,7 +29,7 @@
 1. 将接口服务项目下载到本地
 
 ```bash
-git clone https://github.com/lipengzhou/shop-api.git
+git clone https://github.com/thisliuyang/shop-api.git
 ```
 
 2. 创建一个数据库命名为 `shop`
@@ -97,12 +91,6 @@ npm start
 > 用户名：admin
 >
 > 密码：123456
-
-### API 接口文档
-
-- 在线地址：[http://shopapi.lipengzhou.com/](http://shopapi.lipengzhou.com/)
-- 文档仓库地址：https://github.com/lipengzhou/shop-api-doc
-  - 如果需要可以自行下载本地查看
 
 
 
