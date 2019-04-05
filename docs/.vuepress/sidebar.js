@@ -15,5 +15,8 @@ module.exports = [
   '/09-vue_cli',
   '/10-preheat',
   '/11-pinyougou',
-  '/12-webpack'
+  '/12-webpack',
+  '/13-vuex',
+  '/vue-style-guide',
+  '/vue-debugging'
 ]

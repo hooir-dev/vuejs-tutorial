@@ -1,8 +1,36 @@
-# 第11章 电商管理系统
+# 第11章 综合案例
+
+## 介绍
+
+### 做什么
+
+> 一个前后端分离的电商B端管理系统
+>
+> - 我们主要做客户端
+> - 服务端有准备的接口
+
+### 技术栈
+
+- Vue.js
+- Vue CLI
+- Vue Router
+- ELementUI
+- axios
+- 组件化 + 模块化
+
+### 案例演示
+
+### 案例收获
+
+- 掌握使用 Vue 全家桶开发一个中小型管理系统
 
 ## 零、准备
 
 ### 部署 API 接口服务
+
+> 为了我们学习方便，建议大家把接口服务部署到自己的本地。
+>
+> 实际工作中不需要，一般后端开发人员会把接口部署到本地局域网或者线上给你使用。
 
 1. 将接口服务项目下载到本地
 
@@ -20,44 +48,63 @@ git clone https://github.com/lipengzhou/shop-api.git
 
 ```bash
 cd shop-api
+
+# 或者 yarn install
 npm install
-npm start
 ```
 
-执行完 `npm start` 命令之后，如果看到如下提示信息则说明部署成功。
+> 注意：使用 yarn 安装依赖的时候不要使用淘宝的镜像源，否则可能会导致安装失败
+>
+> 取消淘宝镜像源的方式是删除 `c:/Users/你的用户名/.npmrc` 文件即可
+
+最后，双击 `双击启动接口服务.bat` 文件，启动接口服务，如果看到如下提示信息则说明部署启动成功。
 
 ![](./assets/README0.png)
 
-::: tip
-以后每次开发的时候一定记得 `npm start` 把接口服务启动起来。
-:::
+> 注意：使用接口期间请确保这个命令行处理开启状态
+>
 
 ### 部署预览完整版客户端
 
+> 为了方便学习，建议将完整版客户端包括完整的功能和源代码。
+
 ```bash
+# 下载源码到本地
 git clone https://gitee.com/lipengzhou/shop-admin-dist.git
+
+# 进入项目中
 cd shop-amdin-dist
 
-# 或者 npm install
-yarn install
+# 或者 yarn install
+npm install
 
-# 或者 npm start
-yarn start
+# 或者 yarn start
+npm start
 ```
 
 执行完 `yarn start` 命令之后会看到如下提示：
 
 ![](./assets/README2.png)
 
-::: tip
-执行 `yarn start` 命令之后默认开启的服务占用的端口号是 `8080`，如果 8080 被占用，则会 +1 依次向后使用，例如 8081、8082、8083...，以终端提示为准。
-:::
+> 执行 `yarn start` 命令之后默认开启的服务占用的端口号是 `8080`，如果 8080 被占用，则会 +1 依次向后使用，例如 8081、8082、8083...，以终端提示为准。
 
 打开浏览器访问终端中给出的服务地址。
 
+![1553153073431](./assets/1553153073431.png)
+
+> 测试账号
+>
+> 用户名：admin
+>
+> 密码：123456
+
 ### API 接口文档
 
-> [http://shop-api.circle.ink/](http://shop-api.circle.ink/)
+- 在线地址：[http://shopapi.lipengzhou.com/](http://shopapi.lipengzhou.com/)
+- 文档仓库地址：https://github.com/lipengzhou/shop-api-doc
+  - 如果需要可以自行下载本地查看
+
+
 
 ### Postman 接口测试工具
 
@@ -110,13 +157,11 @@ yarn global add 包名
 yarn global remove 包名
 ```
 
-::: tip
-使用 yarn 管理第三方包会在项目目录中生成一个 `yarn.lock`，它的作用类似于 `package-lock.json`
-:::
+> 使用 yarn 管理第三方包会在项目目录中生成一个 `yarn.lock`，它的作用类似于 `package-lock.json`
 
-::: warning
-建议在项目中只使用一种包管理工具，或者 npm 或者 yarn，不要两者混合使用，否则会导致包的混乱及重复安装反而降低了效率。
-:::
+> 警告：建议在项目中只使用一种包管理工具，或者 npm 或者 yarn，不要两者混合使用，否则会导致包的混乱及重复安装反而降低了效率。
+>
+> 如果想在你的半拉子项目中切换另一个工具，那就把 node_moudles 删除再使用另一个工具全部安装一下。
 
 ---
 
@@ -126,54 +171,152 @@ yarn global remove 包名
 
 ```bash
 # 如果已经安装过了则不需要重新安装
-npm install -g vue-cli
+npm install -g @vue/cli
 
-# 基于 webpack 模板初始化一个名称为 admin-vue 的项目
-vue init webpack admin-vue
+vue create shop-admin-65
 ```
 
-![](./assets/README1.png)
+![1553140274639](./assets/1553140274639.png)
 
-::: tip
-如果装包的过程长时间不动，建议 `Ctrl + C` 打断安装，自己手动在该项目中执行 `npm install`
-:::
+![1553140540883](./assets/1553140540883.png)
 
-启动开发模式：
+> Babel 是一个插件，它能把 ECMAScript 6 代码转成 ECMAScript 5 ，从而可以在低版本浏览器运行。
+>
+> Router 就是 Vue Router
+>
+> Linter / Formatter 就是代码格式校验工具
+
+![1553140616129](./assets/1553140616129.png)
+
+> 这里就是问你使用传统的 url 路由路径还是使用 hash 路由路径
+>
+> Y 就是使用传统的 url 路径（非hash），更简洁漂亮，但是需要做额外的服务器配置，兼容性不好。
+>
+> n 使用 hash 路径，简单直接，不需要任何配置，兼容性好。
+>
+> 输入 y 或者 n 敲回车进入下一步。
+
+![1553141186574](./assets/1553141186574.png)
+
+> 选择与校验工具配合的校验规则。
+>
+> Airbnb JavaScript Style：规则太多，使用麻烦，很多使用者需要单独去定制
+>
+> JavaScript Standard Style：规则刚好够用，不需要做太多修改
+>
+> Prettier：这是一个规则+格式化的工具，暂时不考虑
+>
+> 规则是人定的，在符合大多数人的习惯的情况下可以做自定义修改。
+
+![1553141352000](./assets/1553141352000.png)
+
+> 第1个选项表示每次保存文件的时候，自动校验代码格式
+>
+> 第2个选项表示只有当你使用 git commit 提交代码的时候才进行代码格式校验
+>
+> 这里我们选择第1个，有错及时改
+
+![1553141511202](./assets/1553141511202.png)
+
+> Vue CLI 会安装一些插件，而插件有自己的配置文件
+>
+> 第1个选项意思是把插件的配置文件生成到单独的文件中
+>
+> 第2选项意思是把插件的配置生成到 package.json 文件中
+>
+> 建议选择第1种，单独生成插件的配置文件，不和 package.json 文件混在一起。
+>
+> 因为我们可能需要对某个插件进行单独的配置，所以建议插件的配置生成单独的配置文件。
+
+![1553141627713](./assets/1553141627713.png)
+
+> 这里就是问你是否将我们刚才一系列的选择保存为一个定制项（就是你每一步选的啥都存起来了）。
+>
+> 如果保存了定制项，则下一次生成项目的时候可以快速的选择这个定制项，一步完成跟这里一模一样的选择配置。
+
+![1553141839374](./assets/1553141839374.png)
+
+> 例如我这里需要让它记住这个定制项，输入 y ，然后它会让你给这个定制项起个名字。
+
+![1553155523220](./assets/1553155523220.png)
+
+> 第1个选项使用 yarn 作为包管理工具
+>
+> 第2个选项使用 npm 作为包管理工具
+>
+> 根据自己的需要选择一个。
+>
+> 如果没有安装  yarn，这里就直接使用 npm 作为包管理工具了。
+
+![1553141895306](./assets/1553141895306.png)
+
+> 经过一些列配置选择之后，它就开始自动装包。
+>
+
+![1553141967849](./assets/1553141967849.png)
+
+> 等待...
+>
+> 提示：如果装包的过程长时间不动，建议 `Ctrl + C` 打断安装，自己手动在该项目中执行 `npm install`
+
+![1553142055828](./assets/1553142055828.png)
+
+> 看到这样的提示，就证明初始化成功了。
+
+然后按照提示，执行
 
 ```bash
-cd admin-vue
-npm run dev
+cd 项目
+
+# 或者 npm run serve
+yarn serve
 ```
+
+![1553142134758](./assets/1553142134758.png)
+
+> 表示启动成功。
+
+![1553142198580](./assets/1553142198580.png)
+
+> 最后在浏览器中访问给出的地址。
+
+
 
 ### 项目结构介绍
 
-![xxx](./assets/README4.png)
+![1553156109560](./assets/1553156109560.png)
 
-```text{5-11}
-.
-├── build   webpack打包相关配置文件目录
-├── config  webpack打包相关配置文件目录
-├── node_modules  第三方包
-├── src  源代码
-│   ├── assets  存放一些静态资源，例如 css、img、fonts
-│   ├── components  业务组件
-│   ├── router
-│   ├── └── index.js  路由配置文件
-│   ├── App.vue  根组件
-│   └── main.js  项目启动入口文件
-├── static  静态资源
-│   └── .gitkeep  没啥用，用来充当一个文件就可以提交我们的 static 目录，未来有了其它文件可以把它删掉
-├── .babelrc  es6转es5配置文件，给 babel 编译器用的
-├── .editorconfig  给编辑器看的
-├── .eslintignore  给eslint代码风格校验工具使用的，用来配置忽略代码风格校验的文件或是目录
-├── .eslintrc.js  给eslint代码风格校验工具使用的，用来配置代码风格校验规则
-├── .gitignore  给git使用的，用来配置忽略上传的文件
-├── index.html  单页面应用程序的单页
-├── package.json  项目说明，用来保存依赖项等信息
-├── package-lock.json  锁定第三方包的版本，以及保存包的下载地址
-├── .postcssrc.js  给postcss用的，postcss类似于 less、sass 预处理器
-└── README.md  项目说明文档
-```
+- node_modules 第三方包存储目录
+- public 托管的静态资源目录
+- src 源码
+  - assets 静态静态
+  - components 公共组件存储目录
+  - views 路由组件存储目录
+  - App.vue 根组件
+  - main.js 启动入口
+  - router.js 路由文件
+- .browserlistrc 插件相关配置文件
+- .editorconfig 插件相关配置文件
+- .eslintrc.js 代码校验器相关配置文件
+  - 例如想要修改代码校验规则可以去这个文件中进行修改
+- .gitignore git的忽略配置文件
+- babel.config.js babel相关的配置文件
+  - babel 可以把 ECMAScript6 转成 es5
+- package.json 包说明文件，包含项目名称、依赖信息等数据
+- postcss.config.js 插件相关配置文件
+- README.md 请读我
+- yarn.lock 类似于 package-lock.json 文件
+
+
+
+### 程序的启动
+
+- 找到 main.js
+  - 加载 App.vue 根组件
+  - 配置路由到程序中
+- 将 App.vue 替换到入口节点
+- 当请求 / 就展示 Home 组件
+- 当请求 /about 就展示 About 组件
 
 ### 代码风格
 

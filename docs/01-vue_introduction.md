@@ -12,7 +12,7 @@
   + React
   + Vue
 
-## Vue是什么
+## 是什么
 
 以下引自官网原话：
 
@@ -26,7 +26,7 @@
   + 随着生态的慢慢发展，如今已经有了 Vue Router、Vuex、Vue CLI、Vue Server Renderer 等功能库，所以当 Vue 和这些核心功能库结合到一起的时候，我们称之为一个框架
   + 这些技术一般也称之为 Vue 全家桶，所以学习 Vue 实际上就是要学习 Vue 全家桶才能发挥出 Vue 的威力
 - 由尤雨溪开发并于2014年2月开源于 Github
-  + 目前已收货了 10w+ :star:
+  + 目前已收货了 13w+ :star:
 - 可以轻松构建 **SPA 应用程序**
 - 通过 **指令** 扩展了 HTML，通过 **表达式** 绑定数据到 HTML
 - 通过组件化开发极大的提高了开发的效率和可维护性
@@ -42,8 +42,8 @@
 - Vue.js 由尤雨溪个人正式发布于2014年2月，并开源于 Github
 - 2015年10月27日，正式发布 `1.0`
 - 2016年8月1 日，正式发布 `2.0`
-- 截止到 2018-3-30 目前最新版本为 `2.5.16`
-- 目前已在 Github 收获 80k+ Star
+- 截止到 2019-3 目前最新版本为 `2.6.10`
+- 目前已在 Github 收获 13w+ Star
 
 ---
 
@@ -61,7 +61,19 @@ Vue 是为了克服 HTML 在构建应用上的不足而设计的。Vue 有着诸
 
 ![components.png](./assets/components.png)
 
+---
 
+## 对比传统 DOM 操作
+
+> 更少的代码实现更给力的功能。
+
+### 自增
+
+### 切换显示与隐藏
+
+### 列表渲染
+
+---
 
 ## 相关链接
 
@@ -71,8 +83,6 @@ Vue 是为了克服 HTML 在构建应用上的不足而设计的。Vue 有着诸
 - [Vue 官方 API 参考文档](https://cn.vuejs.org/v2/api/)
 - [Vue 官方示例](https://cn.vuejs.org/v2/examples/)
 - [awesome-vue](https://github.com/vuejs/awesome-vue)
-- [我们为什么要用vue，他解决了什么问题，如何使用它？](https://blog.csdn.net/wxl1555/article/details/79964818 )
-- [VUE（现代框架） VS jquery（传统库）](https://zhuanlan.zhihu.com/p/20197803 )
 
 ---
 

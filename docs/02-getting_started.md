@@ -1,19 +1,26 @@
 # 第2章 起步
 
+- 搜索是什么
+- 看官网能干什么
+- 探索怎么用
+
 ---
 
 ## 安装
 
 - Vue.js 不支持 IE8 及其以下版本
-- 最新稳定版本：2.5.16
-- 每个版本的更新日志见 [Github Releases](https://github.com/vuejs/vue/releases)
+  + 因为 Vue 使用了 IE8 无法模拟的 ECMAScript 5 特性。但它支持所有兼容 ECMAScript 5 的浏览器。
+- 最新稳定版本：2.6.10
+  + 每个版本的更新日志见 [Github Releases](https://github.com/vuejs/vue/releases)
 - 直接下载
-  + 开发版本：https://vuejs.org/js/vue.js
-  + 生产版本：https://vuejs.org/js/vue.min.js
+  + 开发版本：`https://vuejs.org/js/vue.js`
+  + 生产版本：`https://vuejs.org/js/vue.min.js`
 - CDN
-  - `<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>`
-- 使用 `npm` 下载（默认安装最新稳定版）
-  + `npm install vue`
+  - `<script src="https://cdn.jsdelivr.net/npm/vue"></script>` 最新稳定版
+  - `<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>` 指定版本
+- 使用 `npm` 下载
+  + `npm install vue` 最新稳定版
+  + `npm install vue@版本号` 指定版本
 
 ---
 
@@ -47,32 +54,10 @@
 
 ## Vue 实例
 
-每个 Vue 应用都是通过用 `Vue` 函数创建一个新的 **Vue 实例**开始的：
-
-```
-var vm = new Vue({
-  // 选项
-})
-```
-
-虽然没有完全遵循 [MVVM 模型](https://zh.wikipedia.org/wiki/MVVM)，但是 Vue 的设计也受到了它的启发。因此在文档中经常会使用 `vm` (ViewModel 的缩写) 这个变量名表示 Vue 实例。
-
-当创建一个 Vue 实例时，你可以传入一个**选项对象**。这篇教程主要描述的就是如何使用这些选项来创建你想要的行为。作为参考，你也可以在 [API 文档](https://cn.vuejs.org/v2/api/#%E9%80%89%E9%A1%B9-%E6%95%B0%E6%8D%AE) 中浏览完整的选项列表。
-
-一个 Vue 应用由一个通过 `new Vue` 创建的**根 Vue 实例**，以及可选的嵌套的、可复用的组件树组成。举个例子，一个 todo 应用的组件树可以是这样的：
-
-```
-根实例
-└─ TodoList
-   ├─ TodoItem
-   │  ├─ DeleteTodoButton
-   │  └─ EditTodoButton
-   └─ TodoListFooter
-      ├─ ClearTodosButton
-      └─ TodoListStatistics
-```
-
-我们会在稍后的[组件系统](https://cn.vuejs.org/v2/guide/components.html)章节具体展开。不过现在，你只需要明白所有的 Vue 组件都是 Vue 实例，并且接受相同的选项对象 (一些根实例特有的选项除外)。
+- el
+- data
+- methods
+- ...
 
 ## 文本绑定
 
@@ -108,6 +93,26 @@ var vm = new Vue({
 ## 事件处理
 
 - `v-on`
+
+---
+
+## 课堂练习
+
+以下是几个小练习，用来辅助大家增强体会 Vue 的数据驱动视图思想（MVVM）：
+
+- 姓名展示：两个文本框，让用户分别输入性和名，然后将数据实时展示到界面上
+- 数字自动增长：一个文本框用来呈递数字，一个按钮，用户点击按钮，文本框中的数字+1
+- 购物车计价器：有商品价格，和商品数量，用户可以点击加减按钮改变商品数量，将价格实时展示到界面上
+- 数字计算器：实现加法计算器
+- 数字计算器：实现加减乘除
+
+以上所有练习，都不要着急写代码，不要用以前 DOM 的思想去操作，
+利用 Vue 的数据驱动视图的思想，去考虑问题：
+
+- 根据视图抽象数据模型
+  + 数据
+  + 行为
+- 数据改变，触发视图更新
 
 ---
 

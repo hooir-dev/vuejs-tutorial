@@ -1,18 +1,23 @@
 # 第12章 webpack
 
+![webpack logo default with proper spacing on light background](./assets/logo-on-white-bg.png)
+
 现今的很多网页其实可以看做是功能丰富的应用，它们拥有着复杂的JavaScript代码和一大堆依赖包。为了简化开发的复杂度，前端社区涌现出了很多好的实践方法
 
 模块化，让我们可以把复杂的程序细化为小的文件;
 类似于TypeScript这种在JavaScript基础上拓展的开发语言：使我们能够实现目前版本的JavaScript不能直接使用的特性，并且之后还能转换为JavaScript文件使浏览器可以识别；
 Scss，less等CSS预处理器
 ...
-这些改进确实大大的提高了我们的开发效率，但是利用它们开发的文件往往需要进行额外的处理才能让浏览器识别,而手动处理又是非常繁琐的，这就为WebPack类的工具的出现提供了需求。
+这些改进确实大大的提高了我们的开发效率，但是利用它们开发的文件往往需要进行额外的处理才能让浏览器识别,而手动处理又是非常繁琐的，这就为 WebPack 类的工具的出现提供了需求。
 
 ## 介绍
 
-- 是什么
-  - 打包工具
-  - JavaScript 模块打包之后就可以运行在浏览器
+### 是什么
+
+![img](./assets/what-is-webpack.png)
+
+- 打包工具
+- JavaScript 模块打包之后就可以运行在浏览器
 - 能做什么
   - webpack 可以当作是一个模块打包平台，但是它本身只能打包 JavaScript 模块
   - 对于其它的文件模块资源，则需要使用第三方 loader 来处理
@@ -29,59 +34,87 @@ Scss，less等CSS预处理器
   - html 代码压缩
   - css  代码压缩
   - 。。。。
-- [webpack 1.x](http://webpack.github.io/)
-- [webpack 2.x](https://webpack.js.org/)
-- [官方指南](https://webpack.js.org/guides/)
+
+### 核心概念
+
+- Entry
+- Output
+- Loaders
+- Plugins
+- Mode
+- Browser Compatibility
+
+### 其它打包工具
+
+- [Grunt](https://github.com/gruntjs/grunt)
+- [Gulp](https://github.com/gulpjs/gulp)
+- [Rollup](https://github.com/rollup/rollup)
+- [Browserify](https://github.com/browserify/browserify)
+- [Parcel](https://github.com/parcel-bundler/parcel)
+- [FIS](https://github.com/fex-team/fis3)
+- ...
+
+### 相关资源链接
+
+- webpack 官网
+  - [webpack 1.x](http://webpack.github.io/)
+  - [webpack 2](https://webpack.js.org/)
+- [官方教程](https://webpack.js.org/guides)
+- [Github 仓库](https://github.com/webpack/webpack)
+- [常用 Loaders 列表](https://webpack.js.org/loaders)
+- [常用 Plugins 列表](https://webpack.js.org/plugins)
+
+
 
 ## 起步
 
 ### hello world
 
-全局安装：
+创建示例目录并安装依赖
 
 ```bash
-npm install --global webpack webpack-cli
+mkdir webpack-demo && cd webpack-demo
+npm init -y
+npm install webpack webpack-cli --save-dev
 ```
 
-查看版本号是否安装成功：
 
-```bash
-# 正常的话应该会看到输出一个版本号
-webpack --version
-```
 
-准备目录结构：
+- index.html
+- src
+  - index.js
+  - foo.js
 
-```
-.
-├── index.html
-├── main.js
-└── foo.js
-```
+
 
 `foo.js` 文件内容如下：
 
 ```javascript
-module.exports = function () {
+export default function () {
   console.log('我是 foo 文件模块啊')
 }
 ```
 
+
+
 `main.js` 文件内容如下：
 
 ```javascript
-var foo = require('./foo')
+import foo from './foo'
+
 foo()
+
 ```
 
 打包：
 
 ```shell
-# 默认打包到 dist/main.js 中
-webpack main.js
+npx webpack
 ```
 
-`index.html` 文件内容如下：
+
+
+index.html` 文件内容如下：
 
 ```html
 <!DOCTYPE html>
@@ -102,28 +135,7 @@ webpack main.js
 
 
 
-为了划分目录结构的清晰，所以我们把项目中的源码和打包结果做了如下划分：
-
-- 把源码存储到 src 目录中
-- 把打包的结果存储到 dist 目录中
-
 ### 安装
-
-全局安装：
-
-```shell
-npm install --global webpack
-```
-
-安装在全局的 webpack 打包的时候使用的是你安装在自己电脑上的 webpack，如果到了另一个人的计算机上，它可能安装的是老板本的 webpack。那么就可能涉及到兼容性的问题。
-
-而且如果对方没有在全局安装 webpack 则就无法打包。
-
-
-
-所以，为了解决以上的问题，我们更推荐把 webpack 安装到本地项目中。这样的话项目到哪里，webpack 就跟到了哪里。（打包工具随着项目走）。
-
-
 
 我们安装的时候把 webpack 安装到开发依赖(--save-dev)中，因为 webpack 只是一个打包工具，项目如果需要上线，上线的是打包的结果，而不是这个工具。所以了我们为了区分核心包依赖和开发工具依赖，这里通过 `--save` 和 `--save-dev` 来区分。
 
@@ -202,6 +214,8 @@ webpack
 
 
 ## 打包 JavaScript 模块
+
+> https://webpack.js.org/concepts/modules
 
 ### JavaScript 模块化
 
@@ -294,17 +308,16 @@ import * as xxx from '模块标识'
 
 
 
-## 资源管理
+## 打包其它资源
 
 webpack 不仅可以打包 JavaScript 模块，甚至它把网页开发中的一切资源都可以当作模块来打包处理。
 
 按时它本身不知此，它只是一个打包平台，其它资源，例如 css、less、sass、img 等资源需要结合插件来实现，这些插件在 webpack 中被称之为 loader ，翻译过来就是 加载器 的意思。
 
-### Loading CSS
+### 打包 CSS 样式文件
 
-> 参考链接：
->
-> - https://webpack.js.org/guides/asset-management/#loading-css
+> - https://webpack.js.org/loaders/css-loader
+> - https://webpack.js.org/loaders/style-loader
 
 安装依赖：
 
@@ -349,7 +362,19 @@ npm run build
 
 解释：打包 css 也是把 CSS 文件内容转换成了一个 JavaScript 模块，然后在运行 JavaScript 的时候，会动态的创建一个 style 节点插入到 head 头部。
 
-### Loading Images
+### 打包图片文件
+
+#### file-loader
+
+> https://webpack.js.org/loaders/file-loader
+
+#### image-webpack-loader
+
+> https://github.com/tcoopman/image-webpack-loader
+
+#### url-loader
+
+> https://webpack.js.org/loaders/url-loader/
 
 安装依赖：
 
@@ -379,15 +404,13 @@ module: {
 }
 ```
 
-### Url Loader
+### 打包字体文件
 
-> 优化图片打包
+- file-loader
 
-### Loading Fonts
+### 打包 Less 样式文件
 
-### Loading Data
-
-### Loading Less
+> https://webpack.js.org/loaders/less-loader
 
 安装依赖：
 
@@ -415,9 +438,13 @@ module: {
 
 
 
-### Loading Sass
+### 打包 Sass 样式文件
 
-### transpiling JavaScript
+- https://webpack.js.org/loaders/sass-loader
+
+### 打包 ES6 转换 ES5
+
+> https://webpack.js.org/loaders/babel-loader
 
 - babel
   - http://babeljs.io/
@@ -462,6 +489,11 @@ module: {
 
 #### 配置 babel-polyfill 来提供低版本浏览器中的不支持 API
 
+- entry 入口加载 babel-polyfill
+- .babelrc
+  - useBuiltIns: 'usage'
+- 入口文件 import babel-polyfill
+
 安装：
 
 ```shell
@@ -475,6 +507,8 @@ entry: ['babel-polyfill', './src/main.js'],
 ```
 
 这样话就会在打包的结果中提供一个垫脚片用以兼容低版本浏览器中的不支持的 API。
+
+
 
 #### 配置 transform-runtime 来解决代码重复问题
 
@@ -533,14 +567,11 @@ module: {
 }
 ```
 
-## Url Loader
+## 管理输出
 
-- 小图片直接 base64 编码到 html 文件中
-- 大图片拷贝到打包目录中
+### 打包 HTML 文件
 
-## 输出管理
-
-### HtmlWebpackPlugin
+> https://webpack.js.org/plugins/html-webpack-plugin
 
 你会发现，当你打包结束的时候，如果 index.html 在根目录直接运行的话，那么图片资源这些路径就无法访问到了。解决方案就是把 index.html 放到 dist 目录中。
 
@@ -574,14 +605,76 @@ plugins: [
 ```
 
 
+### 清理 dist 目录
 
-### CleanWebpackPlugin
+> https://github.com/johnagan/clean-webpack-plugin
 
-##  Develoment 开发
+## 开发环境
 
-### Source maps
+### 配置 mode
 
-### webpack-dev-server
+> 作用：打包模式
+>
+> 参考文档：https://webpack.js.org/configuration/mode
+
+| Option        | Description                                |
+| :------------ | :----------------------------------------- |
+| `development` | 开发模式，更快的构建速度，建议开发构建使用 |
+| `production`  | 生产模式，更好的构建结果，建议生产构建使用 |
+| `none`        | 默认优化选项                               |
+
+如果未设置，则webpack将production设置为mode的默认值。
+
+### 配置 Source Map
+
+当 webpack 打包源代码时，可能会很难追踪到 error(错误) 和 warning(警告) 在源代码中的原始位置。例如，如果将三个源文件（`a.js`, `b.js` 和 `c.js`）打包到一个 bundle（`bundle.js`）中，而其中一个源文件包含一个错误，那么堆栈跟踪就会直接指向到 `bundle.js`。你可能需要准确地知道错误来自于哪个源文件，所以这种提示这通常不会提供太多帮助。
+
+为了更容易地追踪 error 和 warning，JavaScript 提供了 [source map](http://blog.teamtreehouse.com/introduction-source-maps) 功能，可以将编译后的代码映射回原始源代码。如果一个错误来自于 `b.js`，source map 就会明确的告诉你。
+
+
+
+扩展阅读：
+
+- [JavaScript Source Map 详解](http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html)
+- [An Introduction to Source Maps](https://blog.teamtreehouse.com/introduction-source-maps)
+  - [译文](https://juejin.im/post/5bd65e1ae51d457aa071feaa)
+
+### 使用 watch 监视模式
+
+```json
+  {
+    "name": "development",
+    "version": "1.0.0",
+    "description": "",
+    "main": "webpack.config.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
++     "watch": "webpack --watch",
+      "build": "webpack"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "clean-webpack-plugin": "^2.0.0",
+      "css-loader": "^0.28.4",
+      "csv-loader": "^2.1.1",
+      "file-loader": "^0.11.2",
+      "html-webpack-plugin": "^2.29.0",
+      "style-loader": "^0.18.2",
+      "webpack": "^3.0.0",
+      "xml-loader": "^1.2.1"
+    }
+  }
+```
+
+### 使用 webpack-dev-server
+
+> https://webpack.js.org/configuration/dev-server/
+
+- 安装依赖
+- 配置
+- 测试
 
 每一次手动打包很麻烦，而且即便有 `--watch` 也不方便，还需要自己手动刷新浏览器。
 
@@ -622,22 +715,13 @@ npm run dev
 
 解释：该工具会自动帮你打包，打包完毕只有会自动开启一个服务器，默认监听 8080 端口号，同时自动打开浏览器让你访问，接下来就会自动监视代码的改变，然后自动编译，编译完毕，自动刷新浏览器。
 
-#### 客户端代理
+#### 配置跨域
 
-> https://webpack.js.org/configuration/dev-server/#devserver-proxy
+> https://webpack.js.org/configuration/dev-server/
 
+### 配置热更新
 
-
-### ESLint 代码规范校验
-
-- eslint
-- eslint-loader
-- eslint-plugin-html
-- 安装
-- 初始化 `.eslintrc.js` 配置文件
-- 配置到 webpack
-
-## Hot Module Replacement 热更新
+> https://webpack.js.org/guides/hot-module-replacement
 
 ```javascript
 const path = require('path')
@@ -725,120 +809,43 @@ module.exports = {
 
 ```
 
+### 配置 ESLint 代码规范校验
 
+> https://webpack.js.org/loaders/eslint-loader
 
-## Vue Loader
+## webpack 高级概念
 
-> 打包 .vue 单文件组件的
->
-> [Vue 单文件组件](https://cn.vuejs.org/v2/guide/single-file-components.html)
->
-> [Vue Loader 官方文档](https://vue-loader.vuejs.org/)
+### Tree Shaking
 
-安装：
+> https://webpack.js.org/guides/tree-shaking
 
-```shell
-# vue-loader 依赖 vue-template-compiler
-npm i -D vue-loader vue-template-compiler
-```
+- 基本概念
+- Tree Shaking
+- 只支持 ES6 模块
 
-配置：
+### 代码分割
 
-```javascript
-module: {
-  rules: [
-    {
-      test: /.vue$/,
-      use: [
-        'vue-loader'
-      ]
-    }
-  ]
-}
-```
+### 懒加载
+
+### 缓存
+
+> https://webpack.js.org/guides/caching
+
+#### 输出的文件名
+
+#### 提取引导模板
 
 
 
-### 组件细则
+## 区分打包环境
 
-`.vue` 文件是一个自定义的文件类型，用类 HTML 语法描述一个 Vue 组件。每个 `.vue` 文件包含三种类型的顶级语言块 `<template>`、`<script>` 和 `<style>`
+> https://webpack.js.org/guides/production
 
-```html
-<template>
-  <div class="example">{{ msg }}</div>
-</template>
+---
 
-<script>
-export default {
-  data () {
-    return {
-      msg: 'Hello world!'
-    }
-  }
-}
-</script>
+## 打包 .vue 文件
 
-<style>
-.example {
-  color: red;
-}
-</style>
-```
-
-### 语言块
-
-- `<template>`
-  - 默认语言：`html`。
-  - 每个 `.vue` 文件最多包含一个 `<template>` 块。
-  - 内容将被提取为字符串，将编译并用作 Vue 组件的 `template` 选项。
-- `<script>`
-  - 默认语言：`js` (在检测到 `babel-loader` 或 `buble-loader` 配置时自动支持ES2015)。
-  - 每个 `.vue` 文件最多包含一个 `<script>` 块。
-  - 该脚本在类 CommonJS 环境中执行 (就像通过 Webpack 打包的正常 js 模块)，这意味这你可以 `require()` 其它依赖。在 ES2015 支持下，你也可以使用 `import` 和 `export` 语法。
-  - 脚本必须导出 Vue.js 组件对象。
-- `<style>`
-  - 默认语言：`css`。
-  - 一个 `.vue` 文件可以包含多个 `<style>` 标签。
-  - `<style>` 标签可以有 `scoped` 或者 `module` 属性 (查看 [CSS 作用域](https://vue-loader.vuejs.org/zh-cn/features/scoped-css.html)和 [CSS Modules](https://vue-loader.vuejs.org/zh-cn/features/css-modules.html)) 以帮助你将样式封装到当前组件。具有不同封装模式的多个 `<style>` 标签可以在同一个组件中混合使用。
-  - 默认情况下，将会使用 `style-loader` 提取内容，并通过 `<style>` 标签动态加入文档的 `<head>` 中，也可以[配置 Webpack 将所有 styles 提取到单个 CSS 文件中](https://vue-loader.vuejs.org/zh-cn/configurations/extract-css.html)。
-
-### css 作用域
-
-当 `<style>` 标签有 `scoped` 属性时，它的 CSS 只作用于当前组件中的元素。
-
-```html
-<style scoped>
-.example {
-  color: red;
-}
-</style>
-
-<template>
-  <div class="example">hi</div>
-</template>
-```
-
-也可以在一个组件中同时使用有作用域和无作用域的样式：
-
-```html
-<style>
-/* 全局样式 */
-</style>
-
-<style scoped>
-/* 本地样式 */
-</style>
-```
-
-如果你希望 `scoped` 样式中的一个选择器能够作用得“更深”，例如影响子组件，你可以使用 `>>>` 操作符：
-
-```html
-<style scoped>
-.a >>> .b { /* ... */ }
-</style>
-```
-
-
+> https://vue-loader.vuejs.org/zh/
 
 ## Resolve
 

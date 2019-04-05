@@ -430,7 +430,7 @@ console.log(aa)
 
 ```
 
-### 导出
+### 导出 export
 
 如果模块只有一个成员，建议 `export default`
 
@@ -504,7 +504,7 @@ export default function (x, y) {
 
 
 
-### 导入
+### 导入 import
 
 加载 `export default` 成员
 
