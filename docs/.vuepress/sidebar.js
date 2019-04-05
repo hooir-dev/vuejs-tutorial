@@ -18,5 +18,8 @@ module.exports = [
   '/12-webpack',
   '/13-vuex',
   '/vue-style-guide',
-  '/vue-debugging'
+  '/vue-debugging',
+  '/vue-cli-example',
+  '/mvvm',
+  '/direvtives'
 ]

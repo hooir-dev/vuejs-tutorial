@@ -2,7 +2,7 @@
 home: true
 heroImage: /logo.png
 actionText: 开始 →
-actionLink: /01-vue_introduction
+actionLink: /00-content_introduction
 # features:
 # - title: 简洁至上
 #   details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
